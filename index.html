@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diffusion de ma caméra</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+    }
+    video {
+      border: 2px solid #333;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+</head>
+<body>
+
+  <video id="myCamera" autoplay playsinline></video>
+
+  <script>
+    // Sélection de l'élément vidéo
+    const videoElement = document.getElementById('myCamera');
+
+    // Fonction pour accéder à la caméra
+    async function startCamera() {
+      try {
+        // Accède à la caméra et obtient le flux
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+
+        // Affecte le flux à l'élément vidéo
+        videoElement.srcObject = stream;
+      } catch (error) {
+        console.error("Erreur lors de l'accès à la caméra :", error);
+      }
+    }
+
+    // Démarrer la caméra dès le chargement de la page
+    startCamera();
+  </script>
+
+</body>
+</html>
